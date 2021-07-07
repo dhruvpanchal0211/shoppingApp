@@ -1,11 +1,11 @@
 import React, {PureComponent} from 'react';
 import {Text, View} from 'react-native';
 
-export default class App extends PureComponent {
+export default class ProductOverViewScreen extends PureComponent {
   render() {
     return (
       <View>
-        <Text> App.js </Text>
+        <Text> ProductOverViewScreen </Text>
       </View>
     );
   }
