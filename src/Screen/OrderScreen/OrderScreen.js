@@ -13,7 +13,7 @@ export default class OrderScreen extends PureComponent {
           onPress={() => {
             this.props.navigation.navigate('CartScreen');
           }}>
-          <Text> CartScreen </Text>
+          <Text>CartScreen</Text>
         </TouchableOpacity>
       </View>
     );
