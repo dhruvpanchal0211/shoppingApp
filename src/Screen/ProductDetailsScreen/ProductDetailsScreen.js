@@ -1,11 +1,19 @@
 import React, {PureComponent} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
+import {styles} from './ProductDetailsScreenStyle';
+import AppHeader from '../../Componant/AppHeader'
 
 export default class ProductDetailsScreen extends PureComponent {
   render() {
     return (
-      <View>
-        <Text> ProductDetailsScreen </Text>
+      <View style={styles.container}>
+        <AppHeader title="ProductDetailsScreen" />
+        <TouchableOpacity
+          onPress={() => {
+            this.props.navigation.navigate('OrderScreen');
+          }}>
+          <Text> OrderScreen </Text>
+        </TouchableOpacity>
       </View>
     );
   }
