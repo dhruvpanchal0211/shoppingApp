@@ -1,8 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import {styles} from './OrderScreenStyle';
-import AppHeader from '../../Componant/AppHeader'
-
+import AppHeader from '../../Componant/AppHeader';
 
 export default class OrderScreen extends PureComponent {
   render() {
@@ -13,7 +12,7 @@ export default class OrderScreen extends PureComponent {
           onPress={() => {
             this.props.navigation.navigate('CartScreen');
           }}>
-          <Text> CartScreen </Text>
+          <Text>CartScreen</Text>
         </TouchableOpacity>
       </View>
     );

@@ -1,3 +1,4 @@
 import Screen from './Screen';
+import Images from './images'
 
-export {Screen};
+export {Screen, Images};
