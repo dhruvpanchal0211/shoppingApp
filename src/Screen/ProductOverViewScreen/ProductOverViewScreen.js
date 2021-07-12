@@ -11,12 +11,13 @@ import {styles} from './ProductOverViewScreenStyle';
 import AppHeader from '../../Componant/AppHeader';
 import {connect} from 'react-redux';
 import Card from '../../Componant/Card';
-import * as cartAction from '../../Store/actions/cart';
+import {Const} from '../../Helper';
 import {bindActionCreators} from 'redux';
 
 class ProductOverViewScreen extends PureComponent {
   renderItem = itemData => {
     const {AddToCart} = this.props;
+    // this.setState({itemData: itemData});
     return (
       <ScrollView>
         <View>
@@ -36,7 +37,7 @@ class ProductOverViewScreen extends PureComponent {
               <View style={styles.buttonView}>
                 <TouchableOpacity
                   onPress={() => {
-                    AddToCart;
+                    AddToCart.addToCart(itemData.item);
                   }}>
                   <View style={styles.cartButton}>
                     <Text>Add To Cart</Text>
@@ -53,19 +54,18 @@ class ProductOverViewScreen extends PureComponent {
     const {products} = this.props;
     return (
       <View style={styles.container}>
-        <AppHeader title="ProductOverViewScreen" isMenu isCart />
+        <AppHeader
+          title="ProductOverViewScreen"
+          isMenu
+          isCart
+          {...this.props}
+        />
         <FlatList
           data={products}
           keyExtractor={(item, index) => item.id}
           renderItem={this.renderItem}
           contentContainerStyle={{paddingVertical: 20}}
         />
-        {/* <TouchableOpacity
-          onPress={() => {
-            this.props.navigation.navigate('ProductDetailsScreen');
-          }}>
-          <Text> ProductDetailsScreen </Text>
-        </TouchableOpacity> */}
       </View>
     );
   }
@@ -79,9 +79,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-  console.log('hello', cartAction.addToCart());
   return {
-    AddToCart: bindActionCreators(cartAction.addToCart(), dispatch),
+    AddToCart: bindActionCreators(Const.cartAction, dispatch),
   };
 };
 

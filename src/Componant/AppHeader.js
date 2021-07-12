@@ -1,17 +1,35 @@
 import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet, Image} from 'react-native';
+import {Text, View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {Images} from '../Helper';
 
 export default class AppHeader extends PureComponent {
   backView = () => {
-    return <Image source={Images.back} style={styles.image} />;
+    return (
+      <TouchableOpacity>
+        <Image source={Images.back} style={styles.image} />
+      </TouchableOpacity>
+    );
   };
   cartView = () => {
-    return <Image source={Images.cart} style={styles.image} />;
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.push('CartScreen');
+        }}>
+        <Image source={Images.cart} style={styles.image} />
+      </TouchableOpacity>
+    );
   };
   menuView = () => {
-    return <Image source={Images.menu} style={styles.image} />;
-  }
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.openDrawer();
+        }}>
+        <Image source={Images.menu} style={styles.image} />
+      </TouchableOpacity>
+    );
+  };
   render() {
     const {title, isBack, isCart, isMenu} = this.props;
     return (
@@ -20,7 +38,7 @@ export default class AppHeader extends PureComponent {
           {isBack && this.backView()}
           {isMenu && this.menuView()}
           <Text style={styles.title}> {title} </Text>
-          {isCart && this.cartView()}
+          {isCart ? this.cartView() : <View style={styles.image} />}
         </View>
       </View>
     );

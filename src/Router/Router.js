@@ -10,6 +10,7 @@ import {
   ProductDetailsScreen,
   ProductOverViewScreen,
   UserProductScreen,
+  SideMenuScreen,
 } from '../Screen';
 import {Screen} from '../Helper';
 
@@ -18,10 +19,27 @@ const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 export default class Router extends PureComponent {
+  renderDrawer = () => {
+    return (
+      <Drawer.Navigator drawerContent={props => <SideMenuScreen {...props} />}>
+        <Drawer.Screen
+          name={Screen.ProductOverViewScreen}
+          component={ProductOverViewScreen}
+        />
+        <Drawer.Screen name={Screen.CartScreen} component={CartScreen} />
+      </Drawer.Navigator>
+    );
+  };
+
   render() {
     return (
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
+          <Stack.Screen
+            name={Screen.SideScreen}
+            component={this.renderDrawer}
+          />
+
           <Stack.Screen
             name={Screen.ProductOverViewScreen}
             component={ProductOverViewScreen}
