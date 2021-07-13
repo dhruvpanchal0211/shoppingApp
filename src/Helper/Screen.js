@@ -1,6 +1,6 @@
 const Screen = {
   CartScreen: 'CartScreen',
-  EditProfileScreen: 'EditProfileScreen',
+  EditProductScreen: 'EditProductScreen',
   OrderScreen: 'OrderScreen',
   ProductDetailsScreen: 'ProductDetailsScreen',
   ProductOverViewScreen: 'ProductOverViewScreen',

@@ -1,5 +1,5 @@
 import CartScreen from './CartScreen/CartScreen';
-import EditProfileScreen from './EditProfileScreen/EditProfileScreen';
+import EditProductScreen from './EditProductScreen/EditProductScreen';
 import OrderScreen from './OrderScreen/OrderScreen';
 import ProductDetailsScreen from './ProductDetailsScreen/ProductDetailsScreen';
 import ProductOverViewScreen from './ProductOverViewScreen/ProductOverViewScreen';
@@ -8,7 +8,7 @@ import SideMenuScreen from './SideMenuScreen/SideMenuScreen';
 
 export {
   CartScreen,
-  EditProfileScreen,
+  EditProductScreen,
   OrderScreen,
   ProductDetailsScreen,
   ProductOverViewScreen,

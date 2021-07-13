@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {PureComponent} from 'react';
 import {
   CartScreen,
-  EditProfileScreen,
+  EditProductScreen,
   OrderScreen,
   ProductDetailsScreen,
   ProductOverViewScreen,
@@ -26,7 +26,11 @@ export default class Router extends PureComponent {
           name={Screen.ProductOverViewScreen}
           component={ProductOverViewScreen}
         />
-        <Drawer.Screen name={Screen.CartScreen} component={CartScreen} />
+        <Drawer.Screen name={Screen.OrderScreen} component={OrderScreen} />
+        <Drawer.Screen
+          name={Screen.UserProductScreen}
+          component={UserProductScreen}
+        />
       </Drawer.Navigator>
     );
   };
@@ -55,8 +59,8 @@ export default class Router extends PureComponent {
             component={UserProductScreen}
           />
           <Stack.Screen
-            name={Screen.EditProfileScreen}
-            component={EditProfileScreen}
+            name={Screen.EditProductScreen}
+            component={EditProductScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>

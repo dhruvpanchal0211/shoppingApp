@@ -12,6 +12,7 @@ class CartScreen extends PureComponent {
     super(props);
     this.state = {
       cartData: [],
+      amount: 0,
     };
   }
 
@@ -19,12 +20,19 @@ class CartScreen extends PureComponent {
     this.cartDataHandler();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.cart !== this.props.cart) {
+      this.cartDataHandler();
+      console.log('fsdgfdsgf', this.state.cartData);
+    }
+  }
+
   cartDataHandler = () => {
     const {cart} = this.props;
     let cartdata = [];
 
     for (const key in this.props.cart.items) {
-      console.log('hello', cart.items[key].sum);
+      console.log('hello key', key);
 
       cartdata.push({
         prodId: key,
@@ -39,7 +47,6 @@ class CartScreen extends PureComponent {
 
   renderItem = itemData => {
     const {removeFromCart} = this.props;
-    console.log('itemData', itemData);
     return (
       <View>
         <Cards>
@@ -67,12 +74,17 @@ class CartScreen extends PureComponent {
       </View>
     );
   };
+  gotoOrders = () => {
+    const {addOrders, cart} = this.props;
+    addOrders.addOrder(cart, this.state.amount);
+  };
   render() {
     const {cart} = this.props;
-    console.log('cartItems:', this.state.cartdata);
+    console.log('cartItems:', cart.totleAmount);
+    this.setState({amount: cart.totleAmount.toFixed(2)});
     return (
       <View style={styles.f1}>
-        <AppHeader title="Cart" isBack />
+        <AppHeader title="Cart" isBack {...this.props} />
         <Cards style={{marginTop: 20}}>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View>
@@ -81,7 +93,7 @@ class CartScreen extends PureComponent {
             </View>
             <TouchableOpacity
               onPress={() => {
-                this.props.navigation.navigate('OrderScreen');
+                this.gotoOrders();
               }}>
               <Image source={Images.add_cart} style={styles.imageStyle} />
             </TouchableOpacity>
@@ -108,6 +120,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     removeFromCart: bindActionCreators(Const.cartAction, dispatch),
+    addOrders: bindActionCreators(Const.ordersAction, dispatch),
   };
 };
 

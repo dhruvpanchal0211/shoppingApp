@@ -5,7 +5,10 @@ import {Images} from '../Helper';
 export default class AppHeader extends PureComponent {
   backView = () => {
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.pop();
+        }}>
         <Image source={Images.back} style={styles.image} />
       </TouchableOpacity>
     );
@@ -30,15 +33,42 @@ export default class AppHeader extends PureComponent {
       </TouchableOpacity>
     );
   };
+  addView = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.props.navigation.navigate('EditProductScreen', {
+            productID: 'productID',
+          });
+        }}>
+        <Image source={Images.edit} style={styles.image} />
+      </TouchableOpacity>
+    );
+  };
+  onSubmit = () => {
+    console.log('Submitting');
+  };
+  saveView = () => {
+    return (
+      <TouchableOpacity
+        onPress={() => {
+          this.onSubmit();
+        }}>
+        <Image source={Images.save} style={styles.image} />
+      </TouchableOpacity>
+    );
+  };
   render() {
-    const {title, isBack, isCart, isMenu} = this.props;
+    const {title, isBack, isCart, isMenu, isADD, isSave} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.subView}>
           {isBack && this.backView()}
           {isMenu && this.menuView()}
-          <Text style={styles.title}> {title} </Text>
+          <Text style={styles.title}>{title}</Text>
           {isCart ? this.cartView() : <View style={styles.image} />}
+          {isADD && this.addView()}
+          {isSave && this.saveView()}
         </View>
       </View>
     );

@@ -1,5 +1,8 @@
 import {ADD_TO_CART, REMOVE_FROM_CART} from '../actions/cart';
 import cartItem from '../../Models/cartItems';
+import {ADD_ORDER} from '../actions/orders';
+import {DELETE_PTODUCT} from '../actions/products';
+import {act} from 'react-test-renderer';
 
 const initialState = {
   items: {},
@@ -47,10 +50,26 @@ export default (state = initialState, action) => {
         updatedCartItems = {...state.items};
         delete updatedCartItems[action.pid];
       }
+      console.log('updatedCartItems: ', updatedCartItems);
       return {
         ...state,
         items: updatedCartItems,
-        totleAmount: state.totleAmount - state.items[action.pid].productPrice,
+        totleAmount:
+          state.totleAmount - state.items[action.pid].productPrice.toFixed(2),
+      };
+    case ADD_ORDER:
+      return initialState;
+    case DELETE_PTODUCT:
+      if (!state.items[action.pid]) {
+        return state;
+      }
+      const updatedItems = {...state.items};
+      const itemTotle = state.items[action.pid].sum;
+      delete updatedItems[action.pid];
+      return {
+        ...state,
+        items: updatedItems,
+        totleAmount: state.totleAmount - itemTotle,
       };
   }
   return state;
