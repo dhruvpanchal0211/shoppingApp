@@ -61,7 +61,7 @@ class CartScreen extends PureComponent {
             </View>
             <View style={styles.SubView}>
               <Text>Sum:</Text>
-              <Text>{itemData.item.prodSum.toFixed(2)}</Text>
+              <Text>{itemData.item.prodSum}</Text>
             </View>
             <TouchableOpacity
               onPress={() => {
@@ -77,11 +77,12 @@ class CartScreen extends PureComponent {
   gotoOrders = () => {
     const {addOrders, cart} = this.props;
     addOrders.addOrder(cart, this.state.amount);
+    this.props.navigation.navigate('OrderScreen');
   };
   render() {
     const {cart} = this.props;
     console.log('cartItems:', cart.totleAmount);
-    this.setState({amount: cart.totleAmount.toFixed(2)});
+    this.setState({amount: cart.totleAmount});
     return (
       <View style={styles.f1}>
         <AppHeader title="Cart" isBack {...this.props} />
@@ -89,7 +90,7 @@ class CartScreen extends PureComponent {
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <View>
               <Text>Totla Amount</Text>
-              <Text>${cart.totleAmount.toFixed(2)} </Text>
+              <Text>${cart.totleAmount} </Text>
             </View>
             <TouchableOpacity
               onPress={() => {

@@ -45,19 +45,7 @@ export default class AppHeader extends PureComponent {
       </TouchableOpacity>
     );
   };
-  onSubmit = () => {
-    console.log('Submitting');
-  };
-  saveView = () => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          this.onSubmit();
-        }}>
-        <Image source={Images.save} style={styles.image} />
-      </TouchableOpacity>
-    );
-  };
+
   render() {
     const {title, isBack, isCart, isMenu, isADD, isSave} = this.props;
     return (
@@ -68,7 +56,6 @@ export default class AppHeader extends PureComponent {
           <Text style={styles.title}>{title}</Text>
           {isCart ? this.cartView() : <View style={styles.image} />}
           {isADD && this.addView()}
-          {isSave && this.saveView()}
         </View>
       </View>
     );

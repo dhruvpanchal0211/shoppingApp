@@ -54,8 +54,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         items: updatedCartItems,
-        totleAmount:
-          state.totleAmount - state.items[action.pid].productPrice.toFixed(2),
+        totleAmount: state.totleAmount - state.items[action.pid].productPrice,
       };
     case ADD_ORDER:
       return initialState;

@@ -17,4 +17,20 @@ export const styles = StyleSheet.create({
     borderBottomColor: '#333333',
     borderBottomWidth: 1,
   },
+  submitButtonm: {
+    borderRadius: 20,
+    backgroundColor: '#333',
+    alignItems: 'center',
+    width: '30%',
+    height: 40,
+    justifyContent: 'center',
+  },
+  submitText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  submitView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

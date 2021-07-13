@@ -53,7 +53,6 @@ export default class Router extends PureComponent {
             component={ProductDetailsScreen}
           />
           <Stack.Screen name={Screen.CartScreen} component={CartScreen} />
-          <Stack.Screen name={Screen.OrderScreen} component={OrderScreen} />
           <Stack.Screen
             name={Screen.UserProductScreen}
             component={UserProductScreen}

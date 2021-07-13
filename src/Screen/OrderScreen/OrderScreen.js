@@ -21,7 +21,7 @@ class OrderScreen extends PureComponent {
   renderItem = itemData => {
     console.log('order ItemData: ', itemData.item.items.items);
     return (
-      <Cards>
+      <Cards style={styles.cardView}>
         <Text>Totle Amount: {itemData.item.totlaAmount}</Text>
       </Cards>
     );

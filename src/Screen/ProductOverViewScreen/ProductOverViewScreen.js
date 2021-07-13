@@ -15,6 +15,12 @@ import {Const} from '../../Helper';
 import {bindActionCreators} from 'redux';
 
 class ProductOverViewScreen extends PureComponent {
+  componentDidMount() {
+    const {fetchData} = this.props;
+    console.log('fetchdata:', fetchData.fetchProduct());
+    fetchData.fetchProduct();
+  }
+
   renderItem = itemData => {
     const {AddToCart} = this.props;
     // this.setState({itemData: itemData});
@@ -81,6 +87,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     AddToCart: bindActionCreators(Const.cartAction, dispatch),
+    fetchData: bindActionCreators(Const.productAction, dispatch),
   };
 };
 
