@@ -14,7 +14,6 @@ export default (state = initialState, action) => {
         action.orderData.amount,
         new Date(),
       );
-      console.log('order redux state: ', state);
       return {
         ...state,
         orders: state.orders.concat(newOrder),

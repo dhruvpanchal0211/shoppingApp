@@ -10,7 +10,6 @@ import {styles} from './UserProductScreenStyle';
 class UserProductScreen extends PureComponent {
   renderItem = itemData => {
     const {deleteItem} = this.props;
-    console.log('user ItemData:', itemData);
     return (
       <TouchableOpacity
         onPress={() => {
@@ -52,7 +51,6 @@ class UserProductScreen extends PureComponent {
   };
   render() {
     const {userProducts} = this.props;
-    console.log('render user', userProducts);
     return (
       <View>
         <AppHeader title="User Product" isMenu isADD {...this.props} />
@@ -67,7 +65,6 @@ class UserProductScreen extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log('userProducts,', state.products.userProducts);
   return {
     userProducts: state.products.userProducts,
   };

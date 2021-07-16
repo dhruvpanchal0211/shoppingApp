@@ -16,15 +16,13 @@ class CartScreen extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.cartDataHandler();
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.cart !== this.props.cart) {
       this.cartDataHandler();
-      console.log('fsdgfdsgf', this.state.cartData);
     }
+  }
+  componentDidMount() {
+    this.cartDataHandler();
   }
 
   cartDataHandler = () => {
@@ -32,8 +30,6 @@ class CartScreen extends PureComponent {
     let cartdata = [];
 
     for (const key in this.props.cart.items) {
-      console.log('hello key', key);
-
       cartdata.push({
         prodId: key,
         prodTitle: cart.items[key].productTitle,
@@ -81,7 +77,6 @@ class CartScreen extends PureComponent {
   };
   render() {
     const {cart} = this.props;
-    console.log('cartItems:', cart.totleAmount);
     this.setState({amount: cart.totleAmount});
     return (
       <View style={styles.f1}>
@@ -112,7 +107,6 @@ class CartScreen extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log('cart Items: ', state.cart.totleAmount);
   return {
     cart: state.cart,
   };

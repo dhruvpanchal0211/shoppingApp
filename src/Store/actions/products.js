@@ -1,4 +1,4 @@
-import Products from '../../Models/products';
+import Product from '../../Models/products';
 export const DELETE_PTODUCT = 'DELETE_PTODUCT';
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
@@ -6,15 +6,15 @@ export const SET_PRODUCT = 'SET_PRODUCT';
 
 export const fetchProduct = () => {
   return async dispatch => {
-    const responce = await fetch(
+    const response = await fetch(
       'https://react-n-shopping-default-rtdb.firebaseio.com/products.json',
     );
-    const resData = await responce.json();
+    const resData = await response.json();
     const loadedData = [];
 
     for (const key in resData) {
       loadedData.push(
-        new Products(
+        new Product(
           key,
           'u1',
           resData[key].title,
@@ -50,12 +50,11 @@ export const addProduct = (title, imageURL, price, description) => {
       },
     );
     const resData = await responce.json();
-
-    console.log('resData:', resData);
     dispatch({
       type: ADD_PRODUCT,
       productData: {
         id: resData.name,
+        // ownerId: 'u1',
         title,
         imageURL,
         price,

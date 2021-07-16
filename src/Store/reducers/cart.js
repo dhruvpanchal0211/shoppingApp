@@ -36,7 +36,6 @@ export default (state = initialState, action) => {
     }
     case REMOVE_FROM_CART:
       const currentQty = state.items[action.pid].quantity;
-      console.log('qty:', currentQty);
       let updatedCartItems;
       if (currentQty > 1) {
         const updatedCartItem = new cartItem(
@@ -50,7 +49,6 @@ export default (state = initialState, action) => {
         updatedCartItems = {...state.items};
         delete updatedCartItems[action.pid];
       }
-      console.log('updatedCartItems: ', updatedCartItems);
       return {
         ...state,
         items: updatedCartItems,

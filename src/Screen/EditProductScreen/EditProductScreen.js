@@ -37,22 +37,19 @@ class EditProductScreen extends PureComponent {
   }
   onSubmit = () => {
     const {title, imageURL, price, description} = this.state;
-    console.log('state Itemm: ', this.state);
     const {updateItem} = this.props;
     const {productId} = this.props.route.params;
-    console.log('submitted!!!!', productId);
     if (productId) {
       updateItem.updateProduct(productId, title, imageURL, description);
     } else {
       updateItem.addProduct(title, imageURL, +price, description);
     }
-    this.props.navigation.navigate('UserProductScreen');
+    this.props.navigation.pop();
   };
   render() {
     const {userProducts} = this.props;
     const {productId} = this.props.route.params;
     const {title, imageURL, price, description} = this.state;
-    console.log('edit product id:', productId);
 
     return (
       <View>
@@ -122,7 +119,6 @@ class EditProductScreen extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log('edit USerdata: ', state.products.userProducts);
   return {
     userProducts: state.products.userProducts,
   };

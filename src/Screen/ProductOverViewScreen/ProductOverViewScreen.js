@@ -15,15 +15,46 @@ import {Const} from '../../Helper';
 import {bindActionCreators} from 'redux';
 
 class ProductOverViewScreen extends PureComponent {
-  componentDidMount() {
-    const {fetchData} = this.props;
-    console.log('fetchdata:', fetchData.fetchProduct());
-    fetchData.fetchProduct();
+  constructor(props) {
+    super(props);
+    this.state = {
+      fetchedData: [],
+    };
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.products !== this.props.products) {
+      this.serverItem();
+    }
+  }
+  componentDidMount() {
+    const {fetchData, products} = this.props;
+    fetchData.fetchProduct();
+    this.serverItem();
+  }
+
+  serverItem = () => {
+    const {products} = this.props;
+    let fData = [];
+
+    for (const key in products[0]) {
+      console.log('serverItem log:', products[0][key].title);
+
+      fData.push({
+        id: products[0][key].id,
+        ownerId: products[0][key].ownerId,
+        title: products[0][key].title,
+        imageURL: products[0][key].imageURL,
+        price: products[0][key].price,
+        description: products[0][key].description,
+      });
+    }
+    this.setState({fetchedData: fData});
+  };
 
   renderItem = itemData => {
     const {AddToCart} = this.props;
-    // this.setState({itemData: itemData});
+    console.log('state items:', this.state);
+
     return (
       <ScrollView>
         <View>
@@ -67,8 +98,8 @@ class ProductOverViewScreen extends PureComponent {
           {...this.props}
         />
         <FlatList
-          data={products}
-          keyExtractor={(item, index) => item.id}
+          data={this.state.fetchedData}
+          keyExtractor={(item, index) => index}
           renderItem={this.renderItem}
           contentContainerStyle={{paddingVertical: 20}}
         />

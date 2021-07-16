@@ -15,11 +15,9 @@ class OrderScreen extends PureComponent {
 
   componentDidMount() {
     this.orderDataHandler();
-    console.log('order state:', this.state.orderData);
   }
 
   renderItem = itemData => {
-    console.log('order ItemData: ', itemData.item.items.items);
     return (
       <Cards style={styles.cardView}>
         <Text>Totle Amount: {itemData.item.totlaAmount}</Text>
@@ -32,8 +30,6 @@ class OrderScreen extends PureComponent {
     let orderdata = [];
 
     for (const key in this.props.order.orders) {
-      console.log('hello order', order.orders);
-
       orderdata.push({
         id: order.orders[key].id,
         item: order.orders[key].items,
@@ -45,7 +41,6 @@ class OrderScreen extends PureComponent {
   };
   render() {
     const {order} = this.props;
-    console.log('orders', order.orders);
     return (
       <View style={styles.container}>
         <AppHeader title="OrderScreen" isMenu {...this.props} />
@@ -60,7 +55,6 @@ class OrderScreen extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log('orders Items: ', state.orders);
   return {
     order: state.orders,
   };
