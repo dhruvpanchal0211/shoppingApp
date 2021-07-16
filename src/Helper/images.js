@@ -8,6 +8,7 @@ const Images = {
   user: require('../Assets/Images/user.png'),
   edit: require('../Assets/Images/pencil.png'),
   save: require('../Assets/Images/save.png'),
+  background: require('../Assets/Images/background.jpg')
 };
 
 export default Images;

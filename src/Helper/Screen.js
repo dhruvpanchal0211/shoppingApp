@@ -7,6 +7,9 @@ const Screen = {
   UserProductScreen: 'UserProductScreen',
   SideMenuScreen: 'SideMenuScreen',
   SideScreen: 'SideScreen',
+  LoginScreen: 'LoginScreen',
+  SignupScreen: 'SignupScreen',
+  authStack: 'authStack',
 };
 
 export default Screen;

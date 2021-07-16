@@ -5,6 +5,8 @@ import ProductDetailsScreen from './ProductDetailsScreen/ProductDetailsScreen';
 import ProductOverViewScreen from './ProductOverViewScreen/ProductOverViewScreen';
 import UserProductScreen from './UserProductScreen/UserProductScreen';
 import SideMenuScreen from './SideMenuScreen/SideMenuScreen';
+import LoginScreen from './LoginScreen/LoginScreen';
+import SignupScreen from './SighUpScreen/SignupScreen';
 
 export {
   CartScreen,
@@ -14,4 +16,6 @@ export {
   ProductOverViewScreen,
   UserProductScreen,
   SideMenuScreen,
+  LoginScreen,
+  SignupScreen,
 };

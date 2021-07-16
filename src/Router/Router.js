@@ -11,6 +11,8 @@ import {
   ProductOverViewScreen,
   UserProductScreen,
   SideMenuScreen,
+  SignupScreen,
+  LoginScreen,
 } from '../Screen';
 import {Screen} from '../Helper';
 
@@ -19,6 +21,14 @@ const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 export default class Router extends PureComponent {
+  renderAuthStack = () => {
+    return (
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name={Screen.LoginScreen} component={LoginScreen} />
+        <Stack.Screen name={Screen.SignupScreen} component={SignupScreen} />
+      </Stack.Navigator>
+    );
+  };
   renderDrawer = () => {
     return (
       <Drawer.Navigator drawerContent={props => <SideMenuScreen {...props} />}>
@@ -42,6 +52,10 @@ export default class Router extends PureComponent {
           <Stack.Screen
             name={Screen.SideScreen}
             component={this.renderDrawer}
+          />
+          <Stack.Screen
+            name={Screen.authStack}
+            component={this.renderAuthStack}
           />
 
           <Stack.Screen
