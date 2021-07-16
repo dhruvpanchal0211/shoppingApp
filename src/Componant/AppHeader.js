@@ -47,7 +47,7 @@ export default class AppHeader extends PureComponent {
   };
 
   render() {
-    const {title, isBack, isCart, isMenu, isADD, isSave} = this.props;
+    const {title, isBack, isCart, isMenu, isADD} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.subView}>

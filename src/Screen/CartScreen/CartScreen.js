@@ -81,8 +81,8 @@ class CartScreen extends PureComponent {
     return (
       <View style={styles.f1}>
         <AppHeader title="Cart" isBack {...this.props} />
-        <Cards style={{marginTop: 20}}>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <Cards style={styles.m20}>
+          <View style={styles.view}>
             <View>
               <Text>Totla Amount</Text>
               <Text>${cart.totleAmount} </Text>

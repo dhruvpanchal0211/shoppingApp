@@ -19,10 +19,7 @@ class UserProductScreen extends PureComponent {
         }}>
         <View style={styles.container}>
           <Card style={styles.cardView}>
-            <Image
-              source={{uri: itemData.item.imageURL}}
-              style={{height: 50, width: 50}}
-            />
+            <Image source={{uri: itemData.item.imageURL}} style={styles.hw50} />
             <Text>{itemData.item.title}</Text>
             <View style={styles.rowView}>
               <View style={styles.buttonView}>

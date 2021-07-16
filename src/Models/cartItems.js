@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 class cartItem {
   constructor(quantity, productPrice, productTitle, sum) {
     (this.quantity = quantity),

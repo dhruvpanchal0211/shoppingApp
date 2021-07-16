@@ -20,4 +20,5 @@ export const styles = StyleSheet.create({
     backgroundColor: '#ADD8E6',
     padding: 10,
   },
+  hw50: {height: 50, width: 50},
 });

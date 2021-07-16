@@ -1,3 +1,5 @@
+/* eslint-disable react/no-did-mount-set-state */
+/* eslint-disable no-shadow */
 import React, {PureComponent} from 'react';
 import {
   Text,
@@ -47,9 +49,8 @@ class EditProductScreen extends PureComponent {
     this.props.navigation.pop();
   };
   render() {
-    const {userProducts} = this.props;
     const {productId} = this.props.route.params;
-    const {title, imageURL, price, description} = this.state;
+    const {title, imageURL, description} = this.state;
 
     return (
       <View>

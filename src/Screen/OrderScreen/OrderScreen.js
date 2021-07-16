@@ -1,5 +1,5 @@
 import React, {PureComponent} from 'react';
-import {Text, View, TouchableOpacity, FlatList} from 'react-native';
+import {Text, View, FlatList} from 'react-native';
 import {styles} from './OrderScreenStyle';
 import AppHeader from '../../Componant/AppHeader';
 import {connect} from 'react-redux';

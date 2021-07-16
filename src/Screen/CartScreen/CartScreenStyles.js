@@ -8,4 +8,6 @@ export const styles = StyleSheet.create({
   mainView: {flexDirection: 'row', justifyContent: 'space-around'},
   pv20: {paddingVertical: 20},
   f1: {flex: 1},
+  m20: {marginTop: 20},
+  view: {flexDirection: 'row', justifyContent: 'space-between'},
 });

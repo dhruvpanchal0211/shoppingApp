@@ -1,4 +1,3 @@
-/* eslint-disable no-new */
 import Toast from 'react-native-root-toast';
 
 const showToast = message => {

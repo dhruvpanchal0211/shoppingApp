@@ -27,7 +27,7 @@ class ProductOverViewScreen extends PureComponent {
     }
   }
   componentDidMount() {
-    const {fetchData, products} = this.props;
+    const {fetchData} = this.props;
     fetchData.fetchProduct();
     this.serverItem();
   }
@@ -37,8 +37,6 @@ class ProductOverViewScreen extends PureComponent {
     let fData = [];
 
     for (const key in products[0]) {
-      console.log('serverItem log:', products[0][key].title);
-
       fData.push({
         id: products[0][key].id,
         ownerId: products[0][key].ownerId,
@@ -53,7 +51,6 @@ class ProductOverViewScreen extends PureComponent {
 
   renderItem = itemData => {
     const {AddToCart} = this.props;
-    console.log('state items:', this.state);
 
     return (
       <ScrollView>
@@ -88,7 +85,6 @@ class ProductOverViewScreen extends PureComponent {
     );
   };
   render() {
-    const {products} = this.props;
     return (
       <View style={styles.container}>
         <AppHeader
@@ -101,7 +97,7 @@ class ProductOverViewScreen extends PureComponent {
           data={this.state.fetchedData}
           keyExtractor={(item, index) => index}
           renderItem={this.renderItem}
-          contentContainerStyle={{paddingVertical: 20}}
+          contentContainerStyle={styles.flatList}
         />
       </View>
     );
@@ -109,7 +105,6 @@ class ProductOverViewScreen extends PureComponent {
 }
 
 const mapStateToProps = state => {
-  console.log('store data:', state.products.availableProducts);
   return {
     products: state.products.availableProducts,
   };

@@ -11,10 +11,7 @@ export default class ProductDetailsScreen extends PureComponent {
       <View style={styles.container}>
         <AppHeader title="ProductDetailsScreen" isBack isCart {...this.props} />
         <Cards>
-          <Image
-            source={{uri: itemData.item.imageURL}}
-            style={{height: 50, width: 50}}
-          />
+          <Image source={{uri: itemData.item.imageURL}} style={styles.hw50} />
           <Text>{itemData.item.id}</Text>
         </Cards>
       </View>

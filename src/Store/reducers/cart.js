@@ -2,7 +2,6 @@ import {ADD_TO_CART, REMOVE_FROM_CART} from '../actions/cart';
 import cartItem from '../../Models/cartItems';
 import {ADD_ORDER} from '../actions/orders';
 import {DELETE_PTODUCT} from '../actions/products';
-import {act} from 'react-test-renderer';
 
 const initialState = {
   items: {},

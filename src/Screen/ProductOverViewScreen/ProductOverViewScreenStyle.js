@@ -37,4 +37,5 @@ export const styles = StyleSheet.create({
     aspectRatio: 1,
     alignSelf: 'center',
   },
+  flatList: {paddingVertical: 20},
 });
