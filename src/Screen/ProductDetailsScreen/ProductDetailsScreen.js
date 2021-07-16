@@ -9,7 +9,7 @@ export default class ProductDetailsScreen extends PureComponent {
     const {itemData} = this.props.route.params;
     return (
       <View style={styles.container}>
-        <AppHeader title="ProductDetailsScreen" isBack isCart />
+        <AppHeader title="ProductDetailsScreen" isBack isCart {...this.props} />
         <Cards>
           <Image
             source={{uri: itemData.item.imageURL}}

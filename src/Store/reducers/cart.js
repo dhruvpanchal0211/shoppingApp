@@ -1,5 +1,8 @@
-import {ADD_TO_CART} from '../actions/cart';
+import {ADD_TO_CART, REMOVE_FROM_CART} from '../actions/cart';
 import cartItem from '../../Models/cartItems';
+import {ADD_ORDER} from '../actions/orders';
+import {DELETE_PTODUCT} from '../actions/products';
+import {act} from 'react-test-renderer';
 
 const initialState = {
   items: {},
@@ -31,7 +34,40 @@ export default (state = initialState, action) => {
         totleAmount: state.totleAmount + prodPrice,
       };
     }
+    case REMOVE_FROM_CART:
+      const currentQty = state.items[action.pid].quantity;
+      let updatedCartItems;
+      if (currentQty > 1) {
+        const updatedCartItem = new cartItem(
+          state.items[action.pid].quantity - 1,
+          state.items[action.pid].productPrice,
+          state.items[action.pid].productTitle,
+          state.items[action.pid].sum - state.items[action.pid].productPrice,
+        );
+        updatedCartItems = {...state.items, [action.pid]: updatedCartItem};
+      } else {
+        updatedCartItems = {...state.items};
+        delete updatedCartItems[action.pid];
+      }
+      return {
+        ...state,
+        items: updatedCartItems,
+        totleAmount: state.totleAmount - state.items[action.pid].productPrice,
+      };
+    case ADD_ORDER:
+      return initialState;
+    case DELETE_PTODUCT:
+      if (!state.items[action.pid]) {
+        return state;
+      }
+      const updatedItems = {...state.items};
+      const itemTotle = state.items[action.pid].sum;
+      delete updatedItems[action.pid];
+      return {
+        ...state,
+        items: updatedItems,
+        totleAmount: state.totleAmount - itemTotle,
+      };
   }
-  console.log('state items', state.items);
   return state;
 };
