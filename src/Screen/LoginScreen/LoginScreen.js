@@ -41,7 +41,6 @@ class LoginScreen extends PureComponent {
     this.props.navigation.navigate('ProductOverViewScreen');
   };
   render() {
-    const {auth} = this.props;
     return (
       <View style={styles.mainView}>
         <ImageBackground source={Images.background} style={styles.backGround}>

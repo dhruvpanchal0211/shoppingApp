@@ -1,7 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React, {PureComponent} from 'react';
 import {
   CartScreen,
@@ -18,7 +17,6 @@ import {Screen} from '../Helper';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
 
 export default class Router extends PureComponent {
   renderAuthStack = () => {
