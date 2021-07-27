@@ -9,6 +9,7 @@ const Images = {
   edit: require('../Assets/Images/pencil.png'),
   save: require('../Assets/Images/save.png'),
   background: require('../Assets/Images/background.jpg'),
+  logout: require('../Assets/Images/log-out.png'),
 };
 
 export default Images;

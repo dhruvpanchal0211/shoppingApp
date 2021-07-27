@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#888',
+    flexDirection: 'column',
   },
   text: {
     color: 'white',
@@ -20,5 +21,10 @@ export const styles = StyleSheet.create({
     height: 1,
     width: '100%',
     marginTop: 10,
+  },
+  logout: {
+    alignSelf: 'center',
+    position: 'absolute',
+    bottom: 5,
   },
 });

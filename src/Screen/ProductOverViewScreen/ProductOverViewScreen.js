@@ -36,14 +36,13 @@ class ProductOverViewScreen extends PureComponent {
     const {products} = this.props;
     let fData = [];
 
-    for (const key in products[0]) {
+    for (const key in products) {
       fData.push({
-        id: products[0][key].id,
-        ownerId: products[0][key].ownerId,
-        title: products[0][key].title,
-        imageURL: products[0][key].imageURL,
-        price: products[0][key].price,
-        description: products[0][key].description,
+        id: products[key].id,
+        ownerId: products[key].ownerId,
+        title: products[key].title,
+        imageURL: products[key].imageURL,
+        description: products[key].description,
       });
     }
     this.setState({fetchedData: fData});

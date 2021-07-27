@@ -13,7 +13,8 @@ import {
   SignupScreen,
   LoginScreen,
 } from '../Screen';
-import {Screen} from '../Helper';
+import {Screen, Storage} from '../Helper';
+import store from '../Store/store';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -28,12 +29,12 @@ export default class Router extends PureComponent {
     );
   };
   renderDrawer = () => {
+    const {isLogin} = this.props;
+    if (isLogin) {
+      console.log('isLogin', isLogin);
+    }
     return (
       <Drawer.Navigator drawerContent={props => <SideMenuScreen {...props} />}>
-        <Stack.Screen
-          name={Screen.authStack}
-          component={this.renderAuthStack}
-        />
         <Drawer.Screen
           name={Screen.ProductOverViewScreen}
           component={ProductOverViewScreen}
@@ -48,12 +49,18 @@ export default class Router extends PureComponent {
   };
 
   render() {
-    if ((global.isLogin = true)) {
-      console.log('hello truueeeeeeee');
-    }
+    const {isLogin} = this.props;
     return (
       <NavigationContainer>
-        <Stack.Navigator headerMode="none">
+        <Stack.Navigator
+          headerMode="none"
+          initialRouteName={
+            isLogin ? Screen.ProductOverViewScreen : Screen.authStack
+          }>
+          <Stack.Screen
+            name={Screen.authStack}
+            component={this.renderAuthStack}
+          />
           <Stack.Screen
             name={Screen.SideScreen}
             component={this.renderDrawer}

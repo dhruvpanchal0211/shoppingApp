@@ -7,27 +7,44 @@ export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const SET_PRODUCT = 'SET_PRODUCT';
 
 export const fetchProduct = () => {
-  return async dispatch => {
+  return async (dispatch, getState) => {
+    console.log('lkjhg', global.userData);
+    const ownerId = getState().auth.userId;
+    console.log('fetch_auth:', ownerId);
     try {
       const response = await fetch(
         'https://react-n-shopping-default-rtdb.firebaseio.com/products.json',
       );
       const resData = await response.json();
       const loadedData = [];
+      const userData = [];
 
       for (const key in resData) {
         loadedData.push(
           new Product(
             key,
-            'u1',
+            resData[key].ownerId,
             resData[key].title,
             resData[key].imageURL,
             resData[key].description,
             resData[key].price,
           ),
         );
+        if (resData[key].ownerId === ownerId) {
+          console.log('hello from if');
+          userData.push(
+            new Product(
+              key,
+              resData[key].ownerId,
+              resData[key].title,
+              resData[key].imageURL,
+              resData[key].description,
+              resData[key].price,
+            ),
+          );
+        }
       }
-      dispatch({type: SET_PRODUCT, products: [loadedData]});
+      dispatch({type: SET_PRODUCT, products: loadedData, user: userData});
     } catch (err) {
       throw err;
     }
@@ -52,8 +69,9 @@ export const deleteProduct = productID => {
 
 export const addProduct = (title, imageURL, price, description) => {
   return async dispatch => {
-    // const authStore = store.getState();
-    // console.log('authStore:', authStore);
+    const authStore = store.getState();
+    console.log('authStore:', authStore.auth.userId);
+    const ownerId = authStore.auth.userId;
     const responce = await fetch(
       'https://react-n-shopping-default-rtdb.firebaseio.com/products.json',
       {
@@ -62,6 +80,7 @@ export const addProduct = (title, imageURL, price, description) => {
           'Content-type': 'application/json',
         },
         body: JSON.stringify({
+          ownerId,
           title,
           imageURL,
           price,
@@ -75,6 +94,7 @@ export const addProduct = (title, imageURL, price, description) => {
       type: ADD_PRODUCT,
       productData: {
         id: resData.name,
+        ownerId,
         title,
         imageURL,
         price,
@@ -85,11 +105,10 @@ export const addProduct = (title, imageURL, price, description) => {
 };
 
 export const updateProduct = (id, title, imageURL, description) => {
-  return async (dispatch, getState) => {
-    // console.log('getState:', store.getState());
+  return async dispatch => {
     try {
       const response = await fetch(
-        `https://react-n-shopping-default-rtdb.firebaseio.com/products/${id}.json?auth={'...}`,
+        `https://react-n-shopping-default-rtdb.firebaseio.com/products/${id}.json`,
         {
           method: 'PATCH',
           headers: {

@@ -24,11 +24,12 @@ class EditProductScreen extends PureComponent {
       price: '',
     };
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.cart !== this.props.cart) {
-      this.editDataHandler();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log('in didmount of edit product');
+  //   if (prevProps.cart !== this.props.cart) {
+  //     this.editDataHandler();
+  //   }
+  // }
   componentDidMount() {
     this.editDataHandler();
   }
@@ -36,11 +37,11 @@ class EditProductScreen extends PureComponent {
     const {userProducts} = this.props;
     const {productId} = this.props.route.params;
     for (const key in userProducts) {
-      if (userProducts[0][key].id === productId) {
+      if (userProducts[key].id === productId) {
         this.setState({
-          title: userProducts[0][key].title,
-          imageURL: userProducts[0][key].imageURL,
-          description: userProducts[0][key].description,
+          title: userProducts[key].title,
+          imageURL: userProducts[key].imageURL,
+          description: userProducts[key].description,
         });
       }
     }

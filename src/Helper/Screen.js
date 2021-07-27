@@ -10,6 +10,7 @@ const Screen = {
   LoginScreen: 'LoginScreen',
   SignupScreen: 'SignupScreen',
   authStack: 'authStack',
+  mainScreen: 'mainScreen'
 };
 
 export default Screen;

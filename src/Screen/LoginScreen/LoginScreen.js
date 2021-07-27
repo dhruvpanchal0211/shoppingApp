@@ -16,8 +16,8 @@ class LoginScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'hello123@gmail.com',
-      password: '123456',
+      email: '',
+      password: '',
     };
   }
   onPressLogin = () => {
@@ -39,7 +39,9 @@ class LoginScreen extends PureComponent {
     }
     auth
       .login(email, password)
-      .then(this.props.navigation.navigate('ProductOverViewScreen'))
+      .then(async resolve => {
+        await this.props.navigation.navigate('ProductOverViewScreen');
+      })
       .catch(error => {
         Utility.showToast(error);
       });
