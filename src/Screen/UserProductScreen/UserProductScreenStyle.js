@@ -4,11 +4,11 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    padding: 10,
   },
   cardView: {
     width: '90%',
     alignItems: 'center',
-    marginBottom: 10,
   },
   rowView: {
     flexDirection: 'row',

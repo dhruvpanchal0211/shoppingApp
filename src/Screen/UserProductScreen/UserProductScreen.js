@@ -8,7 +8,36 @@ import {Const} from '../../Helper';
 import {styles} from './UserProductScreenStyle';
 
 class UserProductScreen extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userData: [],
+    };
+  }
+  componentDidMount() {
+    this.userDataHandler();
+  }
+
+  userDataHandler = () => {
+    const {userProducts} = this.props;
+    //console.log('items:', userProducts);
+    let uData = [];
+    for (const key in userProducts[0]) {
+      console.log('UserProducts, ', userProducts[0][key]);
+      uData.push({
+        id: userProducts[0][key].id,
+        ownerID: userProducts[0][key].ownerID,
+        title: userProducts[0][key].title,
+        imageURL: userProducts[0][key].imageURL,
+        description: userProducts[0][key].description,
+        price: userProducts[0][key].price,
+      });
+      this.setState({userData: uData});
+    }
+  };
+
   renderItem = itemData => {
+    console.log('itemData:', itemData);
     const {deleteItem} = this.props;
     return (
       <TouchableOpacity
@@ -47,12 +76,13 @@ class UserProductScreen extends PureComponent {
     );
   };
   render() {
-    const {userProducts} = this.props;
+    const {userData} = this.state;
+    // const {userProducts} = this.props;
     return (
       <View>
         <AppHeader title="User Product" isMenu isADD {...this.props} />
         <FlatList
-          data={userProducts}
+          data={userData}
           keyExtractor={item => item.id}
           renderItem={this.renderItem}
         />

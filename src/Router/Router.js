@@ -30,6 +30,10 @@ export default class Router extends PureComponent {
   renderDrawer = () => {
     return (
       <Drawer.Navigator drawerContent={props => <SideMenuScreen {...props} />}>
+        <Stack.Screen
+          name={Screen.authStack}
+          component={this.renderAuthStack}
+        />
         <Drawer.Screen
           name={Screen.ProductOverViewScreen}
           component={ProductOverViewScreen}
@@ -44,16 +48,15 @@ export default class Router extends PureComponent {
   };
 
   render() {
+    if ((global.isLogin = true)) {
+      console.log('hello truueeeeeeee');
+    }
     return (
       <NavigationContainer>
         <Stack.Navigator headerMode="none">
           <Stack.Screen
             name={Screen.SideScreen}
             component={this.renderDrawer}
-          />
-          <Stack.Screen
-            name={Screen.authStack}
-            component={this.renderAuthStack}
           />
 
           <Stack.Screen

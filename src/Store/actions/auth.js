@@ -1,3 +1,4 @@
+import {Alert} from 'react-native';
 import {Utility} from '../../Helper';
 
 export const SIGNUP = 'SIGNUP';
@@ -32,41 +33,51 @@ export const signup = (email, password) => {
 
 export const login = (email, password) => {
   return async dispatch => {
-    const response = await fetch(
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1qPJg7vxvW_Sb2NrqSrNixrM0WxujcNs',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+    try {
+      const response = await fetch(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1qPJg7vxvW_Sb2NrqSrNixrM0WxujcNs',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            returnSecureToken: true,
+          }),
         },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }),
-      },
-    );
-    const resData = await response.json();
-    if (!response.ok) {
-      console.log('Login resData:', resData.error.message);
+      );
       console.log(response);
+      const resData = await response.json();
+      if (!response.ok) {
+        console.log('Login resData:', resData.error.message);
 
-      if (resData.error.message === 'EMAIL_NOT_FOUND') {
-        Utility.showToast('EMAIL_NOT_FOUND');
-        throw new Error('EMAIL_NOT_FOUND');
-      }
+        if (resData.error.message === 'EMAIL_NOT_FOUND') {
+          Alert.alert('EMAIL_NOT_FOUND');
+          Utility.showToast('EMAIL_NOT_FOUND');
+          return;
+        }
 
-      if (resData.error.message === 'INVALID_PASSWORD') {
-        Utility.showToast('INVALID_PASSWORD');
-        throw new Error('INVALID_PASSWORD');
-      }
+        if (resData.error.message === 'INVALID_PASSWORD') {
+          Utility.showToast('INVALID_PASSWORD');
+          return new Error('INVALID_PASSWORD');
+        }
 
-      if (resData.error.message === 'USER_DISABLED') {
-        Utility.showToast('USER_DISABLED');
-        throw new Error('USER_DISABLED');
+        if (resData.error.message === 'USER_DISABLED') {
+          Utility.showToast('USER_DISABLED');
+          return new Error('USER_DISABLED');
+        }
       }
+      if (response.status === 200) {
+        dispatch({
+          type: LOGIN,
+          token: resData.idToken,
+          userId: resData.localId,
+        });
+      }
+    } catch (err) {
+      Alert.alert(err);
     }
-
-    dispatch({type: SIGNUP, token: resData.idToken, userId: resData.localId});
   };
 };

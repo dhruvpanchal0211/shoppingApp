@@ -22,15 +22,16 @@ export default (state = initialState, action) => {
           state.items[addedProduct.id].quantity + 1,
           prodPrice,
           prodTitle,
-          state.items[addedProduct.id].sum + prodPrice,
+          parseInt(state.items[addedProduct.id].sum) + parseInt(prodPrice),
         );
       } else {
         newOrUpdatedItem = new cartItem(1, prodPrice, prodTitle, prodPrice);
       }
+      console.log('toooootle', typeof state.totleAmount);
       return {
         ...state,
         items: {...state.items, [addedProduct.id]: newOrUpdatedItem},
-        totleAmount: state.totleAmount + prodPrice,
+        totleAmount: state.totleAmount + parseInt(prodPrice),
       };
     }
     case REMOVE_FROM_CART:

@@ -6,7 +6,9 @@ import {
   UPDATE_PRODUCT,
   SET_PRODUCT,
 } from '../actions/products';
+import store from '../store';
 
+// const authState = store.getState();
 const initialState = {
   availableProducts: PRODUCTS,
   userProducts: PRODUCTS.filter(prod => prod.ownerID === 'u1'),
@@ -15,9 +17,10 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCT:
+      // console.log('authhhh store:', authState.auth);
       return {
         availableProducts: action.products,
-        userProducts: action.products.filter(prod => prod.ow),
+        userProducts: action.products,
       };
     case ADD_PRODUCT:
       const newProduct = new Products(
@@ -28,18 +31,20 @@ export default (state = initialState, action) => {
         action.productData.description,
         action.productData.price,
       );
+      console.log('newProduct', newProduct);
       return {
         ...state,
-        availableProducts: state.availableProducts.concat(newProduct),
+        availableProducts: [...state.availableProducts, newProduct], // state.availableProducts.concat(newProduct)
         userProducts: state.userProducts.concat(newProduct),
       };
     case UPDATE_PRODUCT:
       const productIndex = state.userProducts.findIndex(
         prod => prod.id === action.pid,
       );
+      console.log('productIndex', action.pid);
       const updatedProduct = new Products(
         action.pid,
-        state.userProducts[productIndex].ownerID,
+        // state.userProducts[productIndex].ownerID,
         action.productData.title,
         action.productData.imageURL,
         action.productData.description,

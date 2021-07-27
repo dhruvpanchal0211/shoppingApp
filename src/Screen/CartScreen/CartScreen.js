@@ -1,5 +1,12 @@
 import React, {PureComponent} from 'react';
-import {Text, View, FlatList, Image, TouchableOpacity} from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import AppHeader from '../../Componant/AppHeader';
@@ -29,13 +36,15 @@ class CartScreen extends PureComponent {
     const {cart} = this.props;
     let cartdata = [];
 
+    console.log('hello from cart');
     for (const key in this.props.cart.items) {
+      console.log('cart.items[key].sum', cart.items[key].sum);
       cartdata.push({
         prodId: key,
         prodTitle: cart.items[key].productTitle,
         quantity: cart.items[key].quantity,
-        prodPrice: cart.items[key].productPrice,
-        prodSum: cart.items[key].sum,
+        prodPrice: parseInt(cart.items[key].productPrice),
+        prodSum: parseInt(cart.items[key].sum),
       });
     }
     this.setState({cartdata: cartdata});
@@ -72,6 +81,10 @@ class CartScreen extends PureComponent {
   };
   gotoOrders = () => {
     const {addOrders, cart} = this.props;
+    if (this.state.amount === 0) {
+      Alert.alert('Please Add Some Item To Cart');
+      return;
+    }
     addOrders.addOrder(cart, this.state.amount);
     this.props.navigation.navigate('OrderScreen');
   };

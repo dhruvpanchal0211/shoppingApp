@@ -24,19 +24,27 @@ class EditProductScreen extends PureComponent {
       price: '',
     };
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.cart !== this.props.cart) {
+      this.editDataHandler();
+    }
+  }
   componentDidMount() {
+    this.editDataHandler();
+  }
+  editDataHandler = () => {
     const {userProducts} = this.props;
     const {productId} = this.props.route.params;
     for (const key in userProducts) {
-      if (userProducts[key].id === productId) {
+      if (userProducts[0][key].id === productId) {
         this.setState({
-          title: userProducts[key].title,
-          imageURL: userProducts[key].imageURL,
-          description: userProducts[key].description,
+          title: userProducts[0][key].title,
+          imageURL: userProducts[0][key].imageURL,
+          description: userProducts[0][key].description,
         });
       }
     }
-  }
+  };
   onSubmit = () => {
     const {title, imageURL, price, description} = this.state;
     const {updateItem} = this.props;
@@ -44,7 +52,7 @@ class EditProductScreen extends PureComponent {
     if (productId) {
       updateItem.updateProduct(productId, title, imageURL, description);
     } else {
-      updateItem.addProduct(title, imageURL, +price, description);
+      updateItem.addProduct(title, imageURL, price, description);
     }
     this.props.navigation.pop();
   };
@@ -120,6 +128,7 @@ class EditProductScreen extends PureComponent {
 }
 
 const mapStateToProps = state => {
+  console.log('editItem Screen', state.products.userProducts);
   return {
     userProducts: state.products.userProducts,
   };

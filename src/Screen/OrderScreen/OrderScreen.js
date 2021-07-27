@@ -4,6 +4,8 @@ import {styles} from './OrderScreenStyle';
 import AppHeader from '../../Componant/AppHeader';
 import {connect} from 'react-redux';
 import Cards from '../../Componant/Card';
+import {bindActionCreators} from 'redux';
+import {Const} from '../../Helper';
 
 class OrderScreen extends PureComponent {
   constructor(props) {
@@ -14,12 +16,17 @@ class OrderScreen extends PureComponent {
   }
 
   componentDidMount() {
+    const {fetchOrder} = this.props;
+    console.log('fetch', fetchOrder);
+    fetchOrder.fetchOrders();
     this.orderDataHandler();
   }
 
   renderItem = itemData => {
+    console.log('order ItemData:', itemData.item.date);
     return (
       <Cards style={styles.cardView}>
+        <Text numberOfLines={1}>Date: {itemData.item.date.toString()}</Text>
         <Text>Totle Amount: {itemData.item.totlaAmount}</Text>
       </Cards>
     );
@@ -60,4 +67,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(OrderScreen);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchOrder: bindActionCreators(Const.ordersAction, dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderScreen);

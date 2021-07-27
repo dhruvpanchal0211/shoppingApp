@@ -16,8 +16,8 @@ class LoginScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      email: 'hello123@gmail.com',
+      password: '123456',
     };
   }
   onPressLogin = () => {
@@ -37,10 +37,15 @@ class LoginScreen extends PureComponent {
       Utility.showToast('Please Enter Min 6 Digit Password');
       return;
     }
-    auth.login(email, password);
-    this.props.navigation.navigate('ProductOverViewScreen');
+    auth
+      .login(email, password)
+      .then(this.props.navigation.navigate('ProductOverViewScreen'))
+      .catch(error => {
+        Utility.showToast(error);
+      });
   };
   render() {
+    const {email, password} = this.state;
     return (
       <View style={styles.mainView}>
         <ImageBackground source={Images.background} style={styles.backGround}>
@@ -48,6 +53,7 @@ class LoginScreen extends PureComponent {
             <Cards style={styles.cardView}>
               <TextInput
                 style={styles.input}
+                value={email}
                 placeholder="Enter Your Email-Address"
                 placeholderTextColor="#333"
                 onChangeText={email => {
@@ -56,6 +62,7 @@ class LoginScreen extends PureComponent {
               />
               <TextInput
                 style={styles.input}
+                value={password}
                 placeholder="Enter Your Password"
                 placeholderTextColor="#333"
                 secureTextEntry
