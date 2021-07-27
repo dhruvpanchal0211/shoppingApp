@@ -6,49 +6,52 @@ import {
   UPDATE_PRODUCT,
   SET_PRODUCT,
 } from '../actions/products';
-import store from '../store';
 
-// const authState = store.getState();
 const initialState = {
-  availableProducts: PRODUCTS,
-  userProducts: PRODUCTS.filter(prod => prod.ownerID === 'u1'),
+  availableProducts: [],
+  userProducts: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_PRODUCT:
-      // console.log('authhhh store:', authState.auth);
       return {
         availableProducts: action.products,
-        userProducts: action.products,
+        userProducts: action.user,
       };
     case ADD_PRODUCT:
       const newProduct = new Products(
         action.productData.id,
-        'u1',
+        action.productData.ownerId,
         action.productData.title,
         action.productData.imageURL,
         action.productData.description,
         action.productData.price,
       );
-      console.log('newProduct', newProduct);
       return {
         ...state,
-        availableProducts: [...state.availableProducts, newProduct], // state.availableProducts.concat(newProduct)
+        availableProducts: state.availableProducts.concat(newProduct),
         userProducts: state.userProducts.concat(newProduct),
       };
     case UPDATE_PRODUCT:
       const productIndex = state.userProducts.findIndex(
         prod => prod.id === action.pid,
       );
-      console.log('productIndex', action.pid);
+      let ownerId;
+      let price;
+      for (const key in state.userProducts) {
+        if (state.userProducts[key].id === action.pid) {
+          ownerId = state.userProducts[key].ownerID;
+          price = state.userProducts[key].price;
+        }
+      }
       const updatedProduct = new Products(
         action.pid,
-        // state.userProducts[productIndex].ownerID,
+        ownerId,
         action.productData.title,
         action.productData.imageURL,
         action.productData.description,
-        state.userProducts[productIndex].price,
+        price,
       );
       const updatedUserProduct = [...state.userProducts];
       updatedUserProduct[productIndex] = updatedProduct;

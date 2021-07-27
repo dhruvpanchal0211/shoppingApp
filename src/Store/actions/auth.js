@@ -1,5 +1,5 @@
 import {Alert} from 'react-native';
-import {Utility} from '../../Helper';
+import {Storage, Utility} from '../../Helper';
 
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'LOGIN';
@@ -33,7 +33,7 @@ export const signup = (email, password) => {
 
 export const login = (email, password) => {
   return async dispatch => {
-    try {
+    return new Promise(async (resolve, reject) => {
       const response = await fetch(
         'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA1qPJg7vxvW_Sb2NrqSrNixrM0WxujcNs',
         {
@@ -56,28 +56,33 @@ export const login = (email, password) => {
         if (resData.error.message === 'EMAIL_NOT_FOUND') {
           Alert.alert('EMAIL_NOT_FOUND');
           Utility.showToast('EMAIL_NOT_FOUND');
-          return;
+          reject('EMAIL_NOT_FOUND');
         }
 
         if (resData.error.message === 'INVALID_PASSWORD') {
           Utility.showToast('INVALID_PASSWORD');
-          return new Error('INVALID_PASSWORD');
+          reject('INVALID_PASSWORD');
         }
 
         if (resData.error.message === 'USER_DISABLED') {
           Utility.showToast('USER_DISABLED');
-          return new Error('USER_DISABLED');
+          reject('USER_DISABLED');
         }
+        return;
       }
       if (response.status === 200) {
+        const userData = {
+          token: resData.idToken,
+          userId: resData.localId,
+        };
+        resolve();
         dispatch({
           type: LOGIN,
           token: resData.idToken,
           userId: resData.localId,
         });
+        Storage.setUserData(userData);
       }
-    } catch (err) {
-      Alert.alert(err);
-    }
+    });
   };
 };

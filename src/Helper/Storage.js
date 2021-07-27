@@ -2,8 +2,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 const setUserData = async userData => {
   try {
-    global.isLogin = false;
+    global.isLogin = true;
     global.userData = userData;
+    console.log('userdata from storage', userData);
     await AsyncStorage.setItem('@userData', JSON.stringify(userData));
   } catch (e) {
     global.isLogin = false;

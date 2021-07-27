@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Text, View, TouchableOpacity, Image} from 'react-native';
-import {Images} from '../../Helper';
+import {Images, Storage} from '../../Helper';
+import LoginScreen from '../LoginScreen/LoginScreen';
 import {styles} from './SideMenuScreenStyles';
 
 export default class SideMenuScreen extends PureComponent {
@@ -37,6 +38,21 @@ export default class SideMenuScreen extends PureComponent {
           </View>
         </TouchableOpacity>
         <View style={styles.hrLine} />
+        <View style={styles.logout}>
+          <View style={styles.hrLine} />
+          <View style={styles.logout}>
+            <TouchableOpacity
+              onPress={() => {
+                Storage.logout();
+                this.props.navigation.navigate('LoginScreen');
+              }}>
+              <View style={styles.rowView}>
+                <Image source={Images.logout} style={styles.imgView} />
+                <Text style={styles.text}>Log Out</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     );
   }

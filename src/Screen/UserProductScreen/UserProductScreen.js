@@ -18,26 +18,35 @@ class UserProductScreen extends PureComponent {
     this.userDataHandler();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.userProducts !== this.props.userProducts) {
+      for (const key in this.props.userProducts) {
+        console.log('key ', key);
+        this.userDataHandler();
+      }
+    }
+  }
+
   userDataHandler = () => {
     const {userProducts} = this.props;
     //console.log('items:', userProducts);
     let uData = [];
-    for (const key in userProducts[0]) {
-      console.log('UserProducts, ', userProducts[0][key]);
+    for (const key in userProducts) {
+      console.log('key ', key);
+      console.log('UserProducts, ', userProducts[key]);
       uData.push({
-        id: userProducts[0][key].id,
-        ownerID: userProducts[0][key].ownerID,
-        title: userProducts[0][key].title,
-        imageURL: userProducts[0][key].imageURL,
-        description: userProducts[0][key].description,
-        price: userProducts[0][key].price,
+        id: userProducts[key].id,
+        ownerID: userProducts[key].ownerID,
+        title: userProducts[key].title,
+        imageURL: userProducts[key].imageURL,
+        description: userProducts[key].description,
+        price: userProducts[key].price,
       });
       this.setState({userData: uData});
     }
   };
 
   renderItem = itemData => {
-    console.log('itemData:', itemData);
     const {deleteItem} = this.props;
     return (
       <TouchableOpacity
