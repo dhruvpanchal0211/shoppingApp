@@ -57,13 +57,9 @@ class LoginScreen extends PureComponent {
     auth
       .login(email, password)
       .then(async resolve => {
-<<<<<<< HEAD
         await this.getToken();
         await this.props.navigation.navigate(Screen.SideScreen);
         this.setState({email: '', password: ''});
-=======
-        await this.props.navigation.navigate('ProductOverViewScreen');
->>>>>>> main
       })
       .catch(error => {
         Utility.showToast(error);

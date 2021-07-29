@@ -11,11 +11,7 @@ export const ADD_FCM = 'ADD_FCM';
 export const fetchProduct = () => {
   return async (dispatch, getState) => {
     console.log('lkjhg', global.userData);
-<<<<<<< HEAD
     const ownerId = global.userData.userId;
-=======
-    const ownerId = getState().auth.userId;
->>>>>>> main
     console.log('fetch_auth:', ownerId);
     try {
       const response = await fetch(
@@ -75,17 +71,11 @@ export const deleteProduct = productID => {
 
 export const addProduct = (title, imageURL, price, description) => {
   return async dispatch => {
-<<<<<<< HEAD
     let fcmToken = global.fcmToken;
     console.log('fcm:', fcmToken);
     const authStore = store.getState();
     console.log('authStore:', authStore.auth.userId);
     const ownerId = global.userData.userId;
-=======
-    const authStore = store.getState();
-    console.log('authStore:', authStore.auth.userId);
-    const ownerId = authStore.auth.userId;
->>>>>>> main
     const responce = await fetch(
       'https://react-n-shopping-default-rtdb.firebaseio.com/products.json',
       {

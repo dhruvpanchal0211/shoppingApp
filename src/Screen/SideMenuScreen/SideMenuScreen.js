@@ -1,10 +1,6 @@
 import React, {PureComponent} from 'react';
 import {Text, View, TouchableOpacity, Image} from 'react-native';
-<<<<<<< HEAD
 import {Images, Screen, Storage} from '../../Helper';
-=======
-import {Images, Storage} from '../../Helper';
->>>>>>> main
 import LoginScreen from '../LoginScreen/LoginScreen';
 import {styles} from './SideMenuScreenStyles';
 
@@ -49,11 +45,7 @@ export default class SideMenuScreen extends PureComponent {
             <TouchableOpacity
               onPress={() => {
                 Storage.logout();
-<<<<<<< HEAD
                 this.props.navigation.navigate(Screen.authStack);
-=======
-                this.props.navigation.navigate('LoginScreen');
->>>>>>> main
               }}>
               <View style={styles.rowView}>
                 <Image source={Images.logout} style={styles.imgView} />
