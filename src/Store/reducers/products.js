@@ -11,7 +11,10 @@ import {
 const initialState = {
   availableProducts: [],
   userProducts: [],
+<<<<<<< HEAD
   fcmTokens: [],
+=======
+>>>>>>> main
 };
 
 export default (state = initialState, action) => {

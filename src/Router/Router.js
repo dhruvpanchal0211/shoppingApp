@@ -14,8 +14,12 @@ import {
   LoginScreen,
 } from '../Screen';
 import {Screen, Storage} from '../Helper';
+<<<<<<< HEAD
 import messaging from '@react-native-firebase/messaging';
 // import * as admin from 'firebase-admin';
+=======
+import store from '../Store/store';
+>>>>>>> main
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -46,6 +50,10 @@ export default class Router extends PureComponent {
     );
   };
   renderDrawer = () => {
+    const {isLogin} = this.props;
+    if (isLogin) {
+      console.log('isLogin', isLogin);
+    }
     return (
       <Drawer.Navigator drawerContent={props => <SideMenuScreen {...props} />}>
         <Drawer.Screen
@@ -63,12 +71,21 @@ export default class Router extends PureComponent {
 
   render() {
     const {isLogin} = this.props;
+<<<<<<< HEAD
     console.log(isLogin);
+=======
+>>>>>>> main
     return (
       <NavigationContainer>
         <Stack.Navigator
           headerMode="none"
+<<<<<<< HEAD
           initialRouteName={isLogin ? Screen.SideScreen : Screen.authStack}>
+=======
+          initialRouteName={
+            isLogin ? Screen.ProductOverViewScreen : Screen.authStack
+          }>
+>>>>>>> main
           <Stack.Screen
             name={Screen.authStack}
             component={this.renderAuthStack}
