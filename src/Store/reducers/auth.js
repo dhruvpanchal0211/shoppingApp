@@ -1,9 +1,10 @@
+import AsyncStorage from '@react-native-community/async-storage';
+import {Storage} from '../../Helper';
 import {LOGIN, SIGNUP} from '../actions/auth';
 
 const initialState = {
   token: null,
   userId: null,
-  isLogin: false,
 };
 
 export default (state = initialState, action) => {

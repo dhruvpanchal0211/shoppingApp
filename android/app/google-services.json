@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "897435059246",
+    "firebase_url": "https://react-n-shopping-default-rtdb.firebaseio.com",
+    "project_id": "react-n-shopping",
+    "storage_bucket": "react-n-shopping.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897435059246:android:67f3951c4bfc6311b08bbf",
+        "android_client_info": {
+          "package_name": "com.shoppingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897435059246-apcn2mdc1e7jl8igkvcpm3khce7k76e6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shoppingapp",
+            "certificate_hash": "906fec4510c14f652120037cc046d62bbfaee417"
+          }
+        },
+        {
+          "client_id": "897435059246-i66eejrsvfc637gflb9t21ir368hil19.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9sJ3ZV6cWn3HopBv9SycUAeP6v9RvrcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897435059246-i66eejrsvfc637gflb9t21ir368hil19.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

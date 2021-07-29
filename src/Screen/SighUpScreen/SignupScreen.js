@@ -9,7 +9,7 @@ import {
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Cards from '../../Componant/Card';
-import {Const, Images, Utility} from '../../Helper';
+import {Const, Images, Screen, Utility} from '../../Helper';
 import {styles} from './SignupScreenStyles';
 
 class SignupScreen extends PureComponent {
@@ -38,7 +38,7 @@ class SignupScreen extends PureComponent {
       return;
     }
     auth.signup(email, password);
-    this.props.navigation.navigate('ProductOverViewScreen');
+    this.props.navigation.navigate(Screen.SideScreen);
   };
   render() {
     return (

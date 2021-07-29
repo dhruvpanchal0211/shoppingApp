@@ -7,7 +7,7 @@ export const SET_ORDERS = 'SET_ORDERS';
 export const fetchOrders = () => {
   return async dispatch => {
     const authStore = store.getState();
-    const ownerId = authStore.auth.userId;
+    const ownerId = global.userData.userId;
     try {
       const response = await fetch(
         `https://react-n-shopping-default-rtdb.firebaseio.com/orders/${ownerId}.json`,
@@ -42,11 +42,11 @@ export const fetchOrders = () => {
 export const addOrder = (cartItems, totalAmount) => {
   return async dispatch => {
     const authStore = store.getState();
-    const ownerId = authStore.auth.userId;
+    const ownerId = global.userData.userId;
     console.log('add owner', ownerId);
     const date = new Date();
     const response = await fetch(
-      `https://react-n-shopping-default-rtdb.firebaseio.com/orders/${authStore.auth.userId}.json`,
+      `https://react-n-shopping-default-rtdb.firebaseio.com/orders/${global.userData.userId}.json`,
       {
         method: 'POST',
         headers: {

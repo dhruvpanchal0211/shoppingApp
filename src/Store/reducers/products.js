@@ -5,11 +5,13 @@ import {
   DELETE_PTODUCT,
   UPDATE_PRODUCT,
   SET_PRODUCT,
+  ADD_FCM,
 } from '../actions/products';
 
 const initialState = {
   availableProducts: [],
   userProducts: [],
+  fcmTokens: [],
 };
 
 export default (state = initialState, action) => {
@@ -74,6 +76,11 @@ export default (state = initialState, action) => {
         availableProducts: state.availableProducts.filter(
           product => product.id !== action.pid,
         ),
+      };
+    case ADD_FCM:
+      return {
+        ...state,
+        fcmTokens: action.fcmToken,
       };
   }
 

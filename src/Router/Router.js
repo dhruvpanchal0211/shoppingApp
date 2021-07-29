@@ -14,12 +14,29 @@ import {
   LoginScreen,
 } from '../Screen';
 import {Screen, Storage} from '../Helper';
-import store from '../Store/store';
+import messaging from '@react-native-firebase/messaging';
+// import * as admin from 'firebase-admin';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 export default class Router extends PureComponent {
+  // componentDidMount() {
+  //   // Storage.getToken();
+  //   this.getToken();
+  // }
+  // async getToken() {
+  //   console.log('get token called');
+  //   let fcmToken;
+  //   console.log('get fcmToken Called', fcmToken);
+  //   if (!fcmToken) {
+  //     fcmToken = await messaging().getToken();
+  //     if (fcmToken) {
+  //       console.log('check fcm token', fcmToken);
+  //       global.fcmToken = fcmToken;
+  //     }
+  //   }
+  // }
   renderAuthStack = () => {
     return (
       <Stack.Navigator headerMode="none">
@@ -29,10 +46,6 @@ export default class Router extends PureComponent {
     );
   };
   renderDrawer = () => {
-    const {isLogin} = this.props;
-    if (isLogin) {
-      console.log('isLogin', isLogin);
-    }
     return (
       <Drawer.Navigator drawerContent={props => <SideMenuScreen {...props} />}>
         <Drawer.Screen
@@ -50,13 +63,12 @@ export default class Router extends PureComponent {
 
   render() {
     const {isLogin} = this.props;
+    console.log(isLogin);
     return (
       <NavigationContainer>
         <Stack.Navigator
           headerMode="none"
-          initialRouteName={
-            isLogin ? Screen.ProductOverViewScreen : Screen.authStack
-          }>
+          initialRouteName={isLogin ? Screen.SideScreen : Screen.authStack}>
           <Stack.Screen
             name={Screen.authStack}
             component={this.renderAuthStack}
@@ -66,10 +78,10 @@ export default class Router extends PureComponent {
             component={this.renderDrawer}
           />
 
-          <Stack.Screen
+          {/* <Stack.Screen
             name={Screen.ProductOverViewScreen}
             component={ProductOverViewScreen}
-          />
+          /> */}
           <Stack.Screen
             name={Screen.ProductDetailsScreen}
             component={ProductDetailsScreen}

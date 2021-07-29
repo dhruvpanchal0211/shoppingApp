@@ -24,6 +24,7 @@ export default class AppHeader extends PureComponent {
     );
   };
   menuView = () => {
+    console.log('heeelo', this.props);
     return (
       <TouchableOpacity
         onPress={() => {

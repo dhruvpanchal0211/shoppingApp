@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import {messaging} from '@react-native-firebase/messaging';
 
 const setUserData = async userData => {
   try {

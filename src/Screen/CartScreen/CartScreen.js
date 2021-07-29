@@ -43,8 +43,8 @@ class CartScreen extends PureComponent {
         prodId: key,
         prodTitle: cart.items[key].productTitle,
         quantity: cart.items[key].quantity,
-        prodPrice: parseInt(cart.items[key].productPrice),
-        prodSum: parseInt(cart.items[key].sum),
+        prodPrice: cart.items[key].productPrice,
+        prodSum: cart.items[key].sum,
       });
     }
     this.setState({cartdata: cartdata});

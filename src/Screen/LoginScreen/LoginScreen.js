@@ -9,8 +9,9 @@ import {
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Cards from '../../Componant/Card';
-import {Const, Images, Utility} from '../../Helper';
+import {Const, Images, Screen, Utility} from '../../Helper';
 import {styles} from './LoginScreenStyle';
+import messaging from '@react-native-firebase/messaging';
 
 class LoginScreen extends PureComponent {
   constructor(props) {
@@ -20,7 +21,22 @@ class LoginScreen extends PureComponent {
       password: '',
     };
   }
-  onPressLogin = () => {
+  async getToken() {
+    const {fcm} = this.props;
+    console.log('ffccmm:', fcm);
+    console.log('get token called');
+    let fcmToken;
+    console.log('get fcmToken Called', fcmToken);
+    if (!fcmToken) {
+      fcmToken = await messaging().getToken();
+      if (fcmToken) {
+        console.log('check fcm token', fcmToken);
+        global.fcmToken = fcmToken;
+        fcm.addFcm(fcmToken);
+      }
+    }
+  }
+  onPressLogin = async () => {
     const {auth} = this.props;
     console.log('loginauth:', auth);
     const {email, password} = this.state;
@@ -37,10 +53,13 @@ class LoginScreen extends PureComponent {
       Utility.showToast('Please Enter Min 6 Digit Password');
       return;
     }
+
     auth
       .login(email, password)
       .then(async resolve => {
-        await this.props.navigation.navigate('ProductOverViewScreen');
+        await this.getToken();
+        await this.props.navigation.navigate(Screen.SideScreen);
+        this.setState({email: '', password: ''});
       })
       .catch(error => {
         Utility.showToast(error);
@@ -84,7 +103,7 @@ class LoginScreen extends PureComponent {
                 <View style={styles.signup}>
                   <TouchableOpacity
                     onPress={() => {
-                      this.props.navigation.navigate('SignupScreen');
+                      this.props.navigation.navigate(Screen.authStack);
                     }}>
                     <Text style={styles.text}> Signup </Text>
                   </TouchableOpacity>
@@ -101,6 +120,7 @@ class LoginScreen extends PureComponent {
 const mapDispatchToProps = dispatch => {
   return {
     auth: bindActionCreators(Const.authAction, dispatch),
+    fcm: bindActionCreators(Const.productAction, dispatch),
   };
 };
 

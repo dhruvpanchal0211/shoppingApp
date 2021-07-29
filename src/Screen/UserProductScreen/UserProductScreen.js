@@ -21,7 +21,6 @@ class UserProductScreen extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.userProducts !== this.props.userProducts) {
       for (const key in this.props.userProducts) {
-        console.log('key ', key);
         this.userDataHandler();
       }
     }
@@ -32,8 +31,6 @@ class UserProductScreen extends PureComponent {
     //console.log('items:', userProducts);
     let uData = [];
     for (const key in userProducts) {
-      console.log('key ', key);
-      console.log('UserProducts, ', userProducts[key]);
       uData.push({
         id: userProducts[key].id,
         ownerID: userProducts[key].ownerID,
