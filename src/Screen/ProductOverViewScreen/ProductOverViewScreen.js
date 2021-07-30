@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
+  Animated,
 } from 'react-native';
 import {styles} from './ProductOverViewScreenStyle';
 import AppHeader from '../../Componant/AppHeader';
@@ -19,6 +20,8 @@ class ProductOverViewScreen extends PureComponent {
     super(props);
     this.state = {
       fetchedData: [],
+      loading: false,
+      scrollY: new Animated.Value(0).current,
     };
   }
   componentDidUpdate(prevProps, prevState) {
@@ -48,12 +51,15 @@ class ProductOverViewScreen extends PureComponent {
     this.setState({fetchedData: fData});
   };
 
-  renderItem = itemData => {
+  renderItem = (itemData, index) => {
+    const {scrollY} = this.state;
+    const ITEM_DATA = 20;
     const {AddToCart} = this.props;
-
+    const inputRange = [-1, 0, ITEM_DATA * index, ITEM_DATA * (index + 2)];
+    const outputRange = [1, 1, 1, 0];
     return (
       <ScrollView>
-        <View>
+        <Animated.View>
           <Card style={styles.cardView}>
             <TouchableOpacity
               onPress={() => {
@@ -79,11 +85,12 @@ class ProductOverViewScreen extends PureComponent {
               </View>
             </TouchableOpacity>
           </Card>
-        </View>
+        </Animated.View>
       </ScrollView>
     );
   };
   render() {
+    const {scrollY} = this.state;
     return (
       <View style={styles.container}>
         <AppHeader
@@ -92,10 +99,14 @@ class ProductOverViewScreen extends PureComponent {
           isCart
           {...this.props}
         />
-        <FlatList
+        <Animated.FlatList
           data={this.state.fetchedData}
           keyExtractor={(item, index) => index}
           renderItem={this.renderItem}
+          onScroll={Animated.event(
+            [{nativeEvent: {contentOffset: {y: scrollY}}}],
+            {useNativeDriver: true},
+          )}
           contentContainerStyle={styles.flatList}
         />
       </View>

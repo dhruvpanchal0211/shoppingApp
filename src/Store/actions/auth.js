@@ -54,7 +54,6 @@ export const login = (email, password) => {
         console.log('Login resData:', resData.error.message);
 
         if (resData.error.message === 'EMAIL_NOT_FOUND') {
-          Alert.alert('EMAIL_NOT_FOUND');
           Utility.showToast('EMAIL_NOT_FOUND');
           reject('EMAIL_NOT_FOUND');
         }

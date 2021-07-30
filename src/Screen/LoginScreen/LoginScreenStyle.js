@@ -49,4 +49,18 @@ export const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
   },
+  google: {
+    borderRadius: 20,
+    backgroundColor: '#24a0ed',
+    padding: 15,
+    width: '50%',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  fb: {
+    borderRadius: 20,
+    backgroundColor: '#24a0ed',
+    padding: 15,
+    width: '70%',
+  },
 });

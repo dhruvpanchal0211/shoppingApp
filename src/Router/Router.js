@@ -15,28 +15,19 @@ import {
 } from '../Screen';
 import {Screen, Storage} from '../Helper';
 import messaging from '@react-native-firebase/messaging';
-// import * as admin from 'firebase-admin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 export default class Router extends PureComponent {
-  // componentDidMount() {
-  //   // Storage.getToken();
-  //   this.getToken();
-  // }
-  // async getToken() {
-  //   console.log('get token called');
-  //   let fcmToken;
-  //   console.log('get fcmToken Called', fcmToken);
-  //   if (!fcmToken) {
-  //     fcmToken = await messaging().getToken();
-  //     if (fcmToken) {
-  //       console.log('check fcm token', fcmToken);
-  //       global.fcmToken = fcmToken;
-  //     }
-  //   }
-  // }
+  componentDidMount() {
+    // GoogleSignin.configure({
+    //   webClientId:
+    //     '897435059246-i66eejrsvfc637gflb9t21ir368hil19.apps.googleusercontent.com',
+    // });
+  }
+  //
   renderAuthStack = () => {
     return (
       <Stack.Navigator headerMode="none">

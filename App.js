@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {PureComponent} from 'react';
 import {Text, View, Image} from 'react-native';
 import Router from './src/Router/Router';
@@ -17,7 +18,7 @@ export default class App extends PureComponent {
     await Storage.getUserData();
     setTimeout(async () => {
       await this.setState({loading: false});
-    }, 3000);
+    }, 1000);
   }
   render() {
     const {loading} = this.state;
