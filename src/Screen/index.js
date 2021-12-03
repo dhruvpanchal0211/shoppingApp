@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import CartScreen from './CartScreen/CartScreen';
 import EditProductScreen from './EditProductScreen/EditProductScreen';
 import OrderScreen from './OrderScreen/OrderScreen';
