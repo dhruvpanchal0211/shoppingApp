@@ -21,7 +21,7 @@ class ProductOverViewScreen extends PureComponent {
     this.state = {
       fetchedData: [],
       loading: false,
-      scrollY: new Animated.Value(0).current,
+      // scrollY: new Animated.Value(0).current,
     };
   }
   componentDidUpdate(prevProps, prevState) {
@@ -59,7 +59,7 @@ class ProductOverViewScreen extends PureComponent {
     const outputRange = [1, 1, 1, 0];
     return (
       <ScrollView>
-        <Animated.View>
+        <View>
           <Card style={styles.cardView}>
             <TouchableOpacity
               onPress={() => {
@@ -85,7 +85,7 @@ class ProductOverViewScreen extends PureComponent {
               </View>
             </TouchableOpacity>
           </Card>
-        </Animated.View>
+        </View>
       </ScrollView>
     );
   };
@@ -99,15 +99,15 @@ class ProductOverViewScreen extends PureComponent {
           isCart
           {...this.props}
         />
-        <Animated.FlatList
+        <FlatList
           data={this.state.fetchedData}
           keyExtractor={(item, index) => index}
           renderItem={this.renderItem}
-          onScroll={Animated.event(
-            [{nativeEvent: {contentOffset: {y: scrollY}}}],
-            {useNativeDriver: true},
-          )}
-          contentContainerStyle={styles.flatList}
+          // onScroll={Animated.event(
+          //   [{nativeEvent: {contentOffset: {y: scrollY}}}],
+          //   {useNativeDriver: true},
+          // )}
+          // contentContainerStyle={styles.flatList}
         />
       </View>
     );
