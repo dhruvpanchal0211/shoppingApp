@@ -103,6 +103,7 @@ class CartScreen extends PureComponent {
             <TouchableOpacity
               onPress={() => {
                 this.gotoOrders();
+                console.log('fdsdsfsd')
               }}>
               <Image source={Images.add_cart} style={styles.imageStyle} />
             </TouchableOpacity>
